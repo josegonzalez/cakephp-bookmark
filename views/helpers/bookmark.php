@@ -15,13 +15,13 @@ class BookmarkHelper extends Helper{
          /**
 	 * Folder where all the bookmark images are located.
 	 */
-	var $imgFolder = "plugins/bookmark/vendors/img/bookmarks/"; 
+	var $imgFolder = "/bookmark/img/"; 
 	
 	/**
 	 * change this defaults if you want to use a different set of bookmarklets
 	 * The array elements should correspond to $bookmarks keys
 	 */
-	var $defaults = array('yahoo', 'google', 'windows', 'facebook', 'digg', 'ask', 'technorati', 'delicious', 'stumble', 'squidoo', 'netscape', 'slashdot', 'reddit', 'furl', 'blinklist', 'dzone', 'swik', 'shoutwire', 'blinkbits', 'spurl', 'diigo', 'tailrank', 'rawsugar');
+	var $defaults = array('yahoo', 'google', 'windows', 'facebook', 'digg', 'technorati', 'delicious', 'stumble', 'slashdot');
 	
 	/**
 	 * @param $pagetitle - (required) Title of the Page
@@ -31,7 +31,7 @@ class BookmarkHelper extends Helper{
 	 */
 	function getBookMarks($pagetitle, $url = null, $sites = array()){
 		if(empty($url)){
-                        /* Note: As an alternative you can try Router::url("", true). This should return the absolute url of the current page, but wasn't working for me. So I used this hack. Hopefully someone can tell me a better way to find absolute path */
+            /* Note: As an alternative you can try Router::url("", true). This should return the absolute url of the current page, but wasn't working for me. So I used this hack. Hopefully someone can tell me a better way to find absolute path */
 			$url = $this->Html->url(null, true);
 		} 
 		if(empty($sites)){
@@ -50,9 +50,7 @@ class BookmarkHelper extends Helper{
 				$link = str_replace('{title}',urlencode($pagetitle), $link );
 			
 			$name = $this->bookmarks[$site]['name'];
-			$iconLoc = Router::url('/', true) . $this->imgFolder . $this->bookmarks[$site]['icon'];
-			$image = $this->Html->image($iconLoc, array('title'=> "{$name}", 'alt'=>"{$name}", 'border'=> "0"));
-			
+			$image = $this->Html->image($this->imgFolder . $this->bookmarks[$site]['icon'], array('title'=> "{$name}", 'alt'=>"{$name}", 'border'=> "0"));
 			$output .= $this->Html->link($image, $link, array('escape'=> false)). ' ';
 		}
 		return '<div id="bookmarklets">' . $output . '</div>';

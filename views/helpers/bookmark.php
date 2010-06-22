@@ -1,7 +1,7 @@
 <?php
 /**
  * Bookmark Helper
- * 
+ *
  * @author Jose Diaz-Gonzalez
  * @version 1.1
  * returns social bookmarklets
@@ -9,61 +9,75 @@
  * Thanks to http://kevin.vanzonneveld.net/ for the social bookmark list
  * Thanks to Ritesh Agrawal for the original helper
  */
-class BookmarkHelper extends Helper{
+class BookmarkHelper extends Helper {
 	var $helpers = array('Html');
 
          /**
 	 * Folder where all the bookmark images are located.
 	 */
-	var $imgFolder = "/bookmark/img/"; 
-	
+	var $imgFolder = "bookmark/img/";
+
 	/**
 	 * change this defaults if you want to use a different set of bookmarklets
 	 * The array elements should correspond to $bookmarks keys
 	 */
 	var $defaults = array('yahoo', 'google', 'windows', 'facebook', 'digg', 'technorati', 'delicious', 'stumble', 'slashdot');
-	
+
 	/**
 	 * @param $pagetitle - (required) Title of the Page
 	 * @param $url - (optional) URL of the page
 	 * @param $sites - (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
-	 * returns a div with the specified social bookmarklets 
+	 * returns a div with the specified social bookmarklets
 	 */
-	function getBookMarks($pagetitle, $url = null, $sites = array()){
+	function getBookmarks($pagetitle = null, $url = null, $sites = array()) {
+		if (empty($pagetitle)) {
+			$pagetitle = Configure::read('Settings.title');
+		}
 		if(empty($url)){
             /* Note: As an alternative you can try Router::url("", true). This should return the absolute url of the current page, but wasn't working for me. So I used this hack. Hopefully someone can tell me a better way to find absolute path */
 			$url = $this->Html->url(null, true);
-		} 
+		}
 		if(empty($sites)){
 			$sites = $this->defaults;
 		}
-		
 		$output = "";
 		foreach($sites as $site){
-			if(!array_key_exists($site, $this->bookmarks)) 
+			if(!array_key_exists($site, $this->bookmarks))
 				continue;
-				
+
 			//build url
 			$link = $this->bookmarks[$site]['link'];
 			$link = str_replace('{url}', $url, $link);
 			if(substr_count($link, '{title}') > 0)
 				$link = str_replace('{title}',urlencode($pagetitle), $link );
-			
+
 			$name = $this->bookmarks[$site]['name'];
-			$image = $this->Html->image($this->imgFolder . $this->bookmarks[$site]['icon'], array('title'=> "{$name}", 'alt'=>"{$name}", 'border'=> "0"));
+			$title = !empty($this->bookmarks[$site]['text']) ? $this->bookmarks[$site]['text'] : $this->bookmarks[$site]['name'];
+			//echo returns($this->base);
+			$image = $this->Html->image(Router::url('/', true). $this->imgFolder . $this->bookmarks[$site]['icon'], array('title'=> "{$title}", 'alt'=>"{$name}", 'border'=> "0"));
 			$output .= $this->Html->link($image, $link, array('escape'=> false)). ' ';
 		}
 		return '<div id="bookmarklets">' . $output . '</div>';
 	}
-	
+
+	function availableBookmarks() {
+		return array_keys($this->bookmarks);
+	}
+
 	/**
 	 * list of social bookmarks.
-	 * if you want to use any other social bookmark, replace the actual URL with "{url}" and title with "{title}". 
+	 * if you want to use any other social bookmark, replace the actual URL with "{url}" and title with "{title}".
 	 * See below bookmarks for more details
 	 */
 	var $bookmarks = array(
-		'yahoo' => 
-			array(
+		/*
+		'bookmarks' => array(
+			'name' => 'Bookmarks',
+			'link' => 'http://de.wikipedia.org/wiki/Social_Bookmarks',
+			'icon' => 'bookmarks.gif'
+		),
+		*/
+		'yahoo' => array(
 				'name' => 'Yahoo! My Web',
 				'link' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u={url}&t={title}',
 				'icon'=> 'yahoo.gif'
@@ -152,7 +166,7 @@ class BookmarkHelper extends Helper{
 				'name' => 'Shoutwrie',
 				'link' => 'http://www.shoutwire.com/?p=submit&&link={url}',
 				'icon' => 'shoutwire.gif'
-				
+
 				),
 		'blinkbits' => array(
 				'name' => 'Blinkbits',
@@ -175,10 +189,32 @@ class BookmarkHelper extends Helper{
 				'icon' => 'tailrank.gif'
 				),
 		'rawsugar' => array(
-				'name' => 'Rawsugar',
-				'link' => 'http://www.rawsugar.com/tagger/?turl={url}&tttl={title}&editorInitialized=1',
-				'icon' => 'rawsugar.gif'
-				)
+			'name' => 'Rawsugar',
+			'link' => 'http://www.rawsugar.com/tagger/?turl={url}&tttl={title}&editorInitialized=1',
+			'icon' => 'rawsugar.gif'
+		),
+		'twitter' => array(
+			'name' => 'Twitter',
+			'text' => 'Tweet this',
+			'link' => 'http://twitter.com/home/?status={url}+{title}',
+			'icon' => 'twitter.gif'
+		),
+		'vz' => array(
+			'name' => 'VZ',
+			'text' => 'studiVz, meinVz, schülerVz',
+			'link' => 'http://www.studivz.net/Link/Selection/Url/?u={url}+&descr={title}',
+			'icon' => 'vz.gif'
+		),
+		'mister-wong' => array(
+			'name' => 'Mister Wong',
+			'link' => 'http://www.mister-wong.de/addurl/?bm_url={url}&bm_description={title}',
+			'icon' => 'mister-wong.gif'
+		),
+		'posterous' => array(
+			'name' => 'Posterous',
+			'link' => 'http://posterous.com/share?linkto={url}&title={title}',
+			'icon' => 'posterous.gif'
+		),
 	);
 }
 ?>

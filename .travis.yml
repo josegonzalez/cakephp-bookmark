@@ -34,7 +34,6 @@ before_script:
     );
     }" > app/Config/database.php
   - cd app
-  - ln -s ~/.composer/vendor/phpunit/phpunit/PHPUnit Vendor/PHPUnit
 script:
   - ../lib/Cake/Console/cake test Bookmark AllBookmark --stderr
 

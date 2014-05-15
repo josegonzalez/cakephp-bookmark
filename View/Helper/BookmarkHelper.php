@@ -1,4 +1,6 @@
 <?php
+App::uses('AppHelper', 'View/Helper');
+
 /**
  * Bookmark Helper
  *
@@ -14,7 +16,7 @@
  * 2011-05-18 ms - added some functionality
  * 2014-05-15 ms - made composer aware
  */
-class BookmarkHelper extends Helper {
+class BookmarkHelper extends AppHelper {
 
 	public $helpers = array('Html');
 

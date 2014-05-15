@@ -9,6 +9,7 @@ env:
   - CAKE_VERSION=2.6
 
 before_script:
+	- composer global require 'phpunit/phpunit=3.7.33'
   - git clone --depth 1 --branch $CAKE_VERSION git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp
   - rm -R app
   - git clone --depth 1 --branch master git://github.com/dereuromark/tools-app app
@@ -33,6 +34,7 @@ before_script:
     );
     }" > app/Config/database.php
   - cd app
+  - ln -s ~/.composer/vendor/phpunit/phpunit/PHPUnit Vendor/PHPUnit
 script:
   - ../lib/Cake/Console/cake test Bookmark AllBookmark --stderr
 

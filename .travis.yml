@@ -9,7 +9,7 @@ env:
   - CAKE_VERSION=2.6
 
 before_script:
-	- composer global require 'phpunit/phpunit=3.7.33'
+  - composer global require 'phpunit/phpunit=3.7.33'
   - git clone --depth 1 --branch $CAKE_VERSION git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp
   - rm -R app
   - git clone --depth 1 --branch master git://github.com/dereuromark/tools-app app

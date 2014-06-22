@@ -1,0 +1,26 @@
+{
+	"name": "dereuromark/cakephp-bookmark",
+	"type": "cakephp-plugin",
+	"description": "The Bookmark plugin for CakePHP provides share icons and functionality.",
+	"keywords": ["cakephp","bookmark","share"],
+	"homepage": "http://github.com/dereuromark/cakephp-bookmark",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mark Scherer",
+			"homepage": "http://www.dereuromark.de"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"composer/installers": "*"
+	},
+	"support": {
+		"source": "https://github.com/dereuromark/cakephp-bookmark"
+	},
+	"extra": {
+		"installer-paths": {
+			"Plugin/Bookmark/": ["dereuromark/cakephp-bookmark"]
+		}
+	}
+}

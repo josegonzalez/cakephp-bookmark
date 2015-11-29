@@ -1,19 +1,18 @@
 <?php
 /**
- * Group test - Bookmark
+ * All Bookmark plugin tests
  */
 class AllBookmarkTest extends PHPUnit_Framework_TestSuite {
 
-	/**
-	 * Suite method, defines tests for this suite.
-	 *
-	 * @return void
-	 */
+/**
+ * Suite method, defines tests for this suite.
+ *
+ * @return void
+ */
 	public static function suite() {
 		$Suite = new CakeTestSuite('All Bookmark tests');
-		$path = dirname(__FILE__);
-		$Suite->addTestDirectory($path . DS . 'View' . DS . 'Helper');
+		$path = CakePlugin::path('Bookmark') . 'Test' . DS . 'Case' . DS;
+		$suite->addTestDirectoryRecursive($path);
 		return $Suite;
 	}
-
 }

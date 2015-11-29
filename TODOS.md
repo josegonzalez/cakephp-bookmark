@@ -1,3 +1,0 @@
-- categorize by language (de, en, ...)
-- add more bookmarks
-- check if urls are still correct (and maybe find some way to easier manage them)

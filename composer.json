@@ -1,17 +1,17 @@
 {
 	"name": "josegonzalez/cakephp-bookmark",
-	"type": "cakephp-plugin",
 	"description": "The Bookmark plugin for CakePHP provides share icons and functionality.",
+	"type": "cakephp-plugin",
 	"keywords": ["cakephp","bookmark","share"],
 	"homepage": "http://github.com/josegonzalez/cakephp-bookmark",
 	"license": "MIT",
 	"authors": [
 		{
-      			"name": "Jose Diaz-Gonzalez",
-		        "email": "email@josediazgonzalez.com",
-      			"homepage": "http://josediazgonzalez.com",
-      			"role": "Maintainer"
-    		},
+			"name": "Jose Diaz-Gonzalez",
+			"email": "email@josediazgonzalez.com",
+			"homepage": "http://josediazgonzalez.com",
+			"role": "Maintainer"
+		},
 		{
 			"name": "Mark Scherer",
 			"role": "Contributor",
@@ -23,9 +23,12 @@
 		"composer/installers": "*"
 	},
 	"support": {
+		"email": "cakephp+bookmark@josediazgonzalez.com",
+		"issues": "https://github.com/josegonzalez/bookmark/issues",
 		"source": "https://github.com/josegonzalez/cakephp-bookmark"
 	},
 	"extra": {
+		"installer-name": "Bookmark",
 		"installer-paths": {
 			"Plugin/Bookmark/": ["josegonzalez/cakephp-bookmark"]
 		}

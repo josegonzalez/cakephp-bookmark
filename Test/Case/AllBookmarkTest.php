@@ -10,9 +10,9 @@ class AllBookmarkTest extends PHPUnit_Framework_TestSuite {
  * @return void
  */
 	public static function suite() {
-		$Suite = new CakeTestSuite('All Bookmark tests');
+		$suite = new CakeTestSuite('All Bookmark tests');
 		$path = CakePlugin::path('Bookmark') . 'Test' . DS . 'Case' . DS;
 		$suite->addTestDirectoryRecursive($path);
-		return $Suite;
+		return $suite;
 	}
 }

@@ -38,8 +38,8 @@ class BookmarkHelper extends AppHelper {
 /**
  * BookmarkHelper::set()
  *
- * @param mixed $key
- * @param mixed $value
+ * @param mixed $key key to modify
+ * @param mixed $value value to set
  * @return void
  */
 	public function set($key, $value) {
@@ -49,8 +49,8 @@ class BookmarkHelper extends AppHelper {
 /**
  * BookmarkHelper::setFolder()
  *
- * @param mixed $path
- * @param mixed $ext
+ * @param mixed $path path to bookmarks folder
+ * @param mixed $ext image extensions
  * @return void
  */
 	public function setFolder($path, $ext = null) {
@@ -64,10 +64,11 @@ class BookmarkHelper extends AppHelper {
 	}
 
 /**
+ * Returns a list of bookmarks
  *
- * @param $pagetitle - (required) Title of the Page
- * @param $url - (optional) URL of the page
- * @param $sites - (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
+ * @param string $pagetitle (required) Title of the Page
+ * @param array|string $url (optional) URL of the page
+ * @param array $sites (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
  * @return string Div with the specified social bookmarklets
  */
 	public function getBookmarks($pagetitle = null, $url = null, $sites = array()) {
@@ -125,7 +126,7 @@ class BookmarkHelper extends AppHelper {
 /**
  * temporary!
  *
- * @param options
+ * @param array $options an array of options to set for bookmark
  * - annotation (none, inline, short)
  * - lang
  * - size (small, medium, tall, default)
@@ -156,7 +157,7 @@ class BookmarkHelper extends AppHelper {
 /**
  * temporary!
  *
- * @param options
+ * @param array $options an array of options to set for bookmark
  * - lang
  * - size
  * - url
@@ -186,7 +187,7 @@ class BookmarkHelper extends AppHelper {
 /**
  * temporary!
  *
- * @param options
+ * @param array $options an array of options to set for bookmark
  * - lang
  * - count (none,	horizontal,	vertical)
  * - url

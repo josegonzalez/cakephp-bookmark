@@ -64,6 +64,7 @@ class BookmarkHelper extends AppHelper {
 	}
 
 /**
+ *
  * @param $pagetitle - (required) Title of the Page
  * @param $url - (optional) URL of the page
  * @param $sites - (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
@@ -92,8 +93,9 @@ class BookmarkHelper extends AppHelper {
 		$pagetitle = rawurlencode($pagetitle);
 
 		foreach ($sites as $site) {
-			if (!array_key_exists($site, $this->bookmarks))
+			if (!array_key_exists($site, $this->bookmarks)) {
 				continue;
+			}
 
 			//build url
 			$link = $this->bookmarks[$site]['link'];
@@ -111,12 +113,18 @@ class BookmarkHelper extends AppHelper {
 		return '<div id="bookmarklets">' . $output . '</div>';
 	}
 
+/**
+ * Returns an array of available bookmarks
+ *
+ * @return array
+ */
 	public function availableBookmarks() {
 		return array_keys($this->bookmarks);
 	}
 
 /**
  * temporary!
+ *
  * @param options
  * - annotation (none, inline, short)
  * - lang
@@ -147,6 +155,7 @@ class BookmarkHelper extends AppHelper {
 
 /**
  * temporary!
+ *
  * @param options
  * - lang
  * - size
@@ -176,6 +185,7 @@ class BookmarkHelper extends AppHelper {
 
 /**
  * temporary!
+ *
  * @param options
  * - lang
  * - count (none,	horizontal,	vertical)

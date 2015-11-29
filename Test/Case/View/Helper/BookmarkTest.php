@@ -11,9 +11,9 @@ class BookmarkTest extends CakeTestCase {
 
 	public $Bookmark;
 
-	/**
-	 * setUp method
-	 */
+/**
+ * setUp method
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -26,11 +26,11 @@ class BookmarkTest extends CakeTestCase {
 		$this->Bookmark->settings['folder'] = $baseFixUrl . $this->Bookmark->settings['folder'];
 	}
 
-	/**
-	 * BookmarkTest::testAvailableBookmarks()
-	 *
-	 * @return void
-	 */
+/**
+ * BookmarkTest::testAvailableBookmarks()
+ *
+ * @return void
+ */
 	public function testAvailableBookmarks() {
 		echo '<h2>Available Bookmarks</h2>';
 		$res = $this->Bookmark->availableBookmarks();
@@ -48,7 +48,7 @@ class BookmarkTest extends CakeTestCase {
 				'yahoo',
 				'mister-wong'
 			),
-			'out' => array( //TODO: add
+			'out' => array(
 				'myspace',
 				'hyves',
 				'tumblr',
@@ -71,11 +71,11 @@ class BookmarkTest extends CakeTestCase {
 		}
 	}
 
-	/**
-	 * BookmarkTest::testGetBookmarks()
-	 *
-	 * @return void
-	 */
+/**
+ * BookmarkTest::testGetBookmarks()
+ *
+ * @return void
+ */
 	public function testGetBookmarks() {
 		echo '<h2>' . __FUNCTION__ . '</h2>';
 		echo 'Defaults: ';
@@ -89,11 +89,11 @@ class BookmarkTest extends CakeTestCase {
 		$this->assertTrue(!empty($res));
 	}
 
-	/**
-	 * BookmarkTest::testGetBigBookmarks()
-	 *
-	 * @return void
-	 */
+/**
+ * BookmarkTest::testGetBigBookmarks()
+ *
+ * @return void
+ */
 	public function testGetBigBookmarks() {
 		echo '<h2>' . __FUNCTION__ . '</h2>';
 		echo 'Defaults (requires img in app/webroot/img/icons32"!): ';
@@ -105,11 +105,11 @@ class BookmarkTest extends CakeTestCase {
 		$this->assertTrue(!empty($res));
 	}
 
-	/**
-	 * BookmarkTest::testGetBigBookmarksWithShortening()
-	 *
-	 * @return void
-	 */
+/**
+ * BookmarkTest::testGetBigBookmarksWithShortening()
+ *
+ * @return void
+ */
 	public function testGetBigBookmarksWithShortening() {
 		echo '<h2>' . __FUNCTION__ . '</h2>';
 		echo 'Defaults (requires img in app/webroot/img/icons32"!): ';
@@ -122,22 +122,21 @@ class BookmarkTest extends CakeTestCase {
 		$this->assertTrue(!empty($res));
 	}
 
-	/**
-	 * BookmarkTest::testGooglePlus()
-	 *
-	 * @return void
-	 */
+/**
+ * BookmarkTest::testGooglePlus()
+ *
+ * @return void
+ */
 	public function testGooglePlus() {
 		echo $this->Bookmark->googlePlus();
 	}
 
-	/**
-	 * tearDown method
-	 */
+/**
+ * tearDown method
+ */
 	public function tearDown() {
 		parent::tearDown();
 
 		unset($this->Bookmark);
 	}
-
 }

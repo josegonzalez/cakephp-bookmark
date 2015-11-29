@@ -29,30 +29,30 @@ class BookmarkHelper extends AppHelper {
 		'shortenUrl' => false,
 	);
 
-	/**
-	 * change this defaults if you want to use a different set of bookmarklets
-	 * The array elements should correspond to $bookmarks keys
-	 */
+/**
+ * change this defaults if you want to use a different set of bookmarklets
+ * The array elements should correspond to $bookmarks keys
+ */
 	public $defaults = array('yahoo', 'google', 'windows', 'facebook', 'digg', 'technorati', 'delicious', 'stumble', 'slashdot');
 
-	/**
-	 * BookmarkHelper::set()
-	 *
-	 * @param mixed $key
-	 * @param mixed $value
-	 * @return void
-	 */
+/**
+ * BookmarkHelper::set()
+ *
+ * @param mixed $key
+ * @param mixed $value
+ * @return void
+ */
 	public function set($key, $value) {
 		$this->settings[$key] = $value;
 	}
 
-	/**
-	 * BookmarkHelper::setFolder()
-	 *
-	 * @param mixed $path
-	 * @param mixed $ext
-	 * @return void
-	 */
+/**
+ * BookmarkHelper::setFolder()
+ *
+ * @param mixed $path
+ * @param mixed $ext
+ * @return void
+ */
 	public function setFolder($path, $ext = null) {
 		if (substr($path, -1, 1) !== '/') {
 			$path .= '/';
@@ -63,12 +63,12 @@ class BookmarkHelper extends AppHelper {
 		}
 	}
 
-	/**
-	 * @param $pagetitle - (required) Title of the Page
-	 * @param $url - (optional) URL of the page
-	 * @param $sites - (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
-	 * @return string Div with the specified social bookmarklets
-	 */
+/**
+ * @param $pagetitle - (required) Title of the Page
+ * @param $url - (optional) URL of the page
+ * @param $sites - (optional)social bookmarks. If not provided the helper uses the defaults set above. The values should match to the keys of the "bookmarks" variable defined below
+ * @return string Div with the specified social bookmarklets
+ */
 	public function getBookmarks($pagetitle = null, $url = null, $sites = array()) {
 		if (empty($pagetitle)) {
 			$pagetitle = Configure::read('Config.title');
@@ -77,7 +77,7 @@ class BookmarkHelper extends AppHelper {
 			/* Note: As an alternative you can try Router::url("", true). This should return the absolute url of the current page, but wasn't working for me. So I used this hack. Hopefully someone can tell me a better way to find absolute path */
 			$url = $this->Html->url(null, true);
 		}
-		if (empty($sites)){
+		if (empty($sites)) {
 			$sites = $this->defaults;
 		}
 		$output = "";
@@ -92,14 +92,15 @@ class BookmarkHelper extends AppHelper {
 		$pagetitle = rawurlencode($pagetitle);
 
 		foreach ($sites as $site) {
-			if(!array_key_exists($site, $this->bookmarks))
+			if (!array_key_exists($site, $this->bookmarks))
 				continue;
 
 			//build url
 			$link = $this->bookmarks[$site]['link'];
 			$link = str_replace('{url}', $url, $link);
-			if(substr_count($link, '{title}') > 0)
-				$link = str_replace('{title}', $pagetitle, $link );
+			if (substr_count($link, '{title}') > 0) {
+				$link = str_replace('{title}', $pagetitle, $link);
+			}
 
 			$name = $this->bookmarks[$site]['name'];
 			$title = !empty($this->bookmarks[$site]['text']) ? $this->bookmarks[$site]['text'] : $this->bookmarks[$site]['name'];
@@ -114,15 +115,15 @@ class BookmarkHelper extends AppHelper {
 		return array_keys($this->bookmarks);
 	}
 
-	/**
-	 * temporary!
-	 * @param options
-	 * - annotation (none, inline, short)
-	 * - lang
-	 * - size (small, medium, tall, default)
-	 * - url
-	 * @return string
-	 */
+/**
+ * temporary!
+ * @param options
+ * - annotation (none, inline, short)
+ * - lang
+ * - size (small, medium, tall, default)
+ * - url
+ * @return string
+ */
 	public function googlePlus($options = array()) {
 		$defaults = array(
 			'lang' => 'de',
@@ -144,14 +145,14 @@ class BookmarkHelper extends AppHelper {
 <div class="g-plusone" data-size="' . $options['size'] . '" data-annotation="' . $options['annotation'] . '" data-href="' . $options['url'] . '"></div>';
 	}
 
-	/**
-	 * temporary!
-	 * @param options
-	 * - lang
-	 * - size
-	 * - url
-	 * @return string
-	 */
+/**
+ * temporary!
+ * @param options
+ * - lang
+ * - size
+ * - url
+ * @return string
+ */
 	public function facebook($options = array()) {
 		$defaults = array(
 			'lang' => 'de',
@@ -173,17 +174,17 @@ class BookmarkHelper extends AppHelper {
 		return $res;
 	}
 
-	/**
-	 * temporary!
-	 * @param options
-	 * - lang
-	 * - count (none,	horizontal,	vertical)
-	 * - url
-	 * - text
-	 * - hashtags,
-	 * - related
-	 * @return string
-	 */
+/**
+ * temporary!
+ * @param options
+ * - lang
+ * - count (none,	horizontal,	vertical)
+ * - url
+ * - text
+ * - hashtags,
+ * - related
+ * @return string
+ */
 	public function twitter($options = array()) {
 		$defaults = array(
 			'text' => 'Try #' . Configure::read('Config.title') . '!',
@@ -197,7 +198,7 @@ class BookmarkHelper extends AppHelper {
 		$options = am($defaults, $options);
 
 		$res = '<a class="twitter-share-button" data-count="' . $options['count'] . '" data-url="' . $options['url'] . '" data-text="' . $options['text'] . '" data-lang="' . $options['lang'] . '" href="https://twitter.com/share">' . __('Twittern') . '</a>';
-		$res .= '<script>!(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"));</script>';
+		$res .= '<script>!(function (d,s,id) {var js,fjs=d.getElementsByTagName(s)[0];if (!d.getElementById(id)) {js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"));</script>';
 
 		if ($options['width']) {
 			//$res = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/tweet_button.html" style="width:'.$options['width'].'; height:20px;"></iframe>';
@@ -205,11 +206,11 @@ class BookmarkHelper extends AppHelper {
 		return $res;
 	}
 
-	/**
-	 * list of social bookmarks.
-	 * if you want to use any other social bookmark, replace the actual URL with "{url}" and title with "{title}".
-	 * See below bookmarks for more details
-	 */
+/**
+ * list of social bookmarks.
+ * if you want to use any other social bookmark, replace the actual URL with "{url}" and title with "{title}".
+ * See below bookmarks for more details
+ */
 	public $bookmarks = array(
 		/*
 		'bookmarks' => array(
@@ -219,116 +220,115 @@ class BookmarkHelper extends AppHelper {
 		),
 		*/
 		'yahoo' => array(
-				'name' => 'Yahoo! My Web',
-				'link' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u={url}&t={title}',
-				'icon' => 'yahoo'
-			),
+			'name' => 'Yahoo! My Web',
+			'link' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u={url}&t={title}',
+			'icon' => 'yahoo'
+		),
 		'google' => array(
-				'name' => 'Google Bookmarks',
-				'link' => 'http://www.google.com/bookmarks/mark?op=edit&bkmk={url}&title={title}',
-				'icon' => 'google'
-				),
+			'name' => 'Google Bookmarks',
+			'link' => 'http://www.google.com/bookmarks/mark?op=edit&bkmk={url}&title={title}',
+			'icon' => 'google'
+		),
 		'windows' => array(
-				'name' => 'Windows Live',
-				'link' => 'https://favorites.live.com/quickadd.aspx?url={url}&title={title}',
-				'icon' => 'windows'
-				),
+			'name' => 'Windows Live',
+			'link' => 'https://favorites.live.com/quickadd.aspx?url={url}&title={title}',
+			'icon' => 'windows'
+		),
 		'facebook' => array(
-				'name' => 'Facebook',
-				'link' => 'http://www.facebook.com/sharer.php?u={url}&t={title}',
-				'icon' => 'facebook'
-				),
+			'name' => 'Facebook',
+			'link' => 'http://www.facebook.com/sharer.php?u={url}&t={title}',
+			'icon' => 'facebook'
+		),
 		'digg' => array(
-				'name' => 'Digg',
-				'link' => 'http://digg.com/submit?phase=2&url={url}&title={title}',
-				'icon' => 'digg'
-				),
+			'name' => 'Digg',
+			'link' => 'http://digg.com/submit?phase=2&url={url}&title={title}',
+			'icon' => 'digg'
+		),
 		'ask' => array(
-				'name' => 'Ask',
-				'link' => 'http://myjeeves.ask.com/mysearch/BookmarkIt?v=1.2&t=webpages&url={url}&title={title}',
-				'icon' => 'ask',
-			 ),
+			'name' => 'Ask',
+			'link' => 'http://myjeeves.ask.com/mysearch/BookmarkIt?v=1.2&t=webpages&url={url}&title={title}',
+			'icon' => 'ask',
+		),
 		'technorati' => array(
-				'name' => 'Technorati',
-				'link' => 'http://www.technorati.com/faves?add={url}',
-				'icon' => 'technorati'
-				),
+			'name' => 'Technorati',
+			'link' => 'http://www.technorati.com/faves?add={url}',
+			'icon' => 'technorati'
+		),
 		'delicious' => array(
-				'name' => 'del.icio.us',
-				'link' => 'http://del.icio.us/post?url={url}&title={title}',
-				'icon' => 'delicious'
-				),
+			'name' => 'del.icio.us',
+			'link' => 'http://del.icio.us/post?url={url}&title={title}',
+			'icon' => 'delicious'
+		),
 		'stumble' => array(
-				'name' => 'StumbleUpon',
-				'link' => 'http://www.stumbleupon.com/submit?url={url}&title={title}',
-				'icon' => 'stumble'
-				),
+			'name' => 'StumbleUpon',
+			'link' => 'http://www.stumbleupon.com/submit?url={url}&title={title}',
+			'icon' => 'stumble'
+		),
 		'squidoo' => array(
-				'name' => 'Squidoo',
-				'link' => 'http://www.squidoo.com/lensmaster/bookmark?{url}',
-				'icon' => 'squidoo'
-				),
+			'name' => 'Squidoo',
+			'link' => 'http://www.squidoo.com/lensmaster/bookmark?{url}',
+			'icon' => 'squidoo'
+		),
 		'netscape' => array(
-				'name' => 'Netscape',
-				'link' => 'http://www.netscape.com/submit/?U={url}&T={title}',
-				'icon' => 'netscape'
-				),
+			'name' => 'Netscape',
+			'link' => 'http://www.netscape.com/submit/?U={url}&T={title}',
+			'icon' => 'netscape'
+		),
 		'slashdot' => array(
-				'name' => 'Slashdot',
-				'link' => 'http://slashdot.org/bookmark.pl?url={url}&title={title}',
-				'icon' => 'slashdot'
-				),
+			'name' => 'Slashdot',
+			'link' => 'http://slashdot.org/bookmark.pl?url={url}&title={title}',
+			'icon' => 'slashdot'
+		),
 		'reddit' => array(
-				'name' => 'reddit',
-				'link' => 'http://reddit.com/submit?url={url}&title={title}',
-				'icon' => 'reddit'
-				),
+			'name' => 'reddit',
+			'link' => 'http://reddit.com/submit?url={url}&title={title}',
+			'icon' => 'reddit'
+		),
 		'furl' => array(
-				'name' => 'Furl',
-				'link' => 'http://furl.net/storeIt.jsp?u={url}&t={title}',
-				'icon' => 'furl'
-				),
+			'name' => 'Furl',
+			'link' => 'http://furl.net/storeIt.jsp?u={url}&t={title}',
+			'icon' => 'furl'
+		),
 		'blinklist' => array(
-				'name' => 'BlinkList',
-				'link' => 'http://blinklist.com/index.php?Action=Blink/addblink.php&Url={url}&Title={title}',
-				'icon' => 'blinklist'
-				),
+			'name' => 'BlinkList',
+			'link' => 'http://blinklist.com/index.php?Action=Blink/addblink.php&Url={url}&Title={title}',
+			'icon' => 'blinklist'
+		),
 		'dzone' => array(
-				'name' => 'dzone',
-				'link' => 'http://www.dzone.com/links/add.html?url={url}&title={title}',
-				'icon' => 'dzone'
-				),
+			'name' => 'dzone',
+			'link' => 'http://www.dzone.com/links/add.html?url={url}&title={title}',
+			'icon' => 'dzone'
+		),
 		'swik' => array(
-				'name' => 'SWiK',
-				'link' => 'http://stories.swik.net/?submitUrl&url={url}',
-				'icon' => 'swik'
-				),
+			'name' => 'SWiK',
+			'link' => 'http://stories.swik.net/?submitUrl&url={url}',
+			'icon' => 'swik'
+		),
 		'shoutwire' => array(
-				'name' => 'Shoutwrie',
-				'link' => 'http://www.shoutwire.com/?p=submit&link={url}',
-				'icon' => 'shoutwire'
-
-				),
+			'name' => 'Shoutwrie',
+			'link' => 'http://www.shoutwire.com/?p=submit&link={url}',
+			'icon' => 'shoutwire'
+		),
 		'blinkbits' => array(
-				'name' => 'Blinkbits',
-				'link' => 'http://www.blinkbits.com/bookmarklets/save.php?v=1&source_url={url}',
-				'icon' => 'blinkbits'
-				),
+			'name' => 'Blinkbits',
+			'link' => 'http://www.blinkbits.com/bookmarklets/save.php?v=1&source_url={url}',
+			'icon' => 'blinkbits'
+		),
 		'spurl' => array(
-				'name' => 'Spurl',
-				'link' => 'http://www.spurl.net/spurl.php?url={url}&title={title}',
-				'icon' => 'spurl'
-				),
+			'name' => 'Spurl',
+			'link' => 'http://www.spurl.net/spurl.php?url={url}&title={title}',
+			'icon' => 'spurl'
+		),
 		'diigo' => array(
-				'name' => 'Diigo',
-				'link' => 'http://www.diigo.com/post?url={url}&title={title}',
-				'icon' => 'diigo'
-				),
+			'name' => 'Diigo',
+			'link' => 'http://www.diigo.com/post?url={url}&title={title}',
+			'icon' => 'diigo'
+		),
 		'tailrank' => array(
-				'name' => 'Tailrank',
-				'link' => 'http://tailrank.com/share/?link_href={url}&title={title}',
-				'icon' => 'tailrank'
-				),
+			'name' => 'Tailrank',
+			'link' => 'http://tailrank.com/share/?link_href={url}&title={title}',
+			'icon' => 'tailrank'
+		),
 		'rawsugar' => array(
 			'name' => 'Rawsugar',
 			'link' => 'http://www.rawsugar.com/tagger/?turl={url}&tttl={title}&editorInitialized=1',
@@ -338,7 +338,6 @@ class BookmarkHelper extends AppHelper {
 			'name' => 'Twitter',
 			'text' => 'Tweet this',
 			'link' => 'http://twitter.com/?status={url}+{title}',
-			//'link' => 'http://twitter.com/intent/tweet?original_referer={url}&text={title}',
 			'icon' => 'twitter'
 		),
 		'vz' => array(
